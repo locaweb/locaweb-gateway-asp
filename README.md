@@ -6,6 +6,7 @@
 - No arquivo locaweb/LocawebGatewayConfig.asp configure seu token e ambiente.
 - Em todos os arquivos ASP que você for utilizar o Locaweb Gateway ASP, faça o include do arquivo locaweb/LocawebGateway.asp, como no exemplo abaixo:
 
+### Exemplo
 
     <!-- #include file="locaweb/LocawebGateway.asp" -->
     <%
