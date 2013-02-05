@@ -1,10 +1,10 @@
 <!-- #include file="locaweb/LocawebGateway.asp" -->
 <html>
 <head>
-  <title>Exemplo Cartão | Gateway de Pagamentos</title>
+  <title>Exemplo Cartï¿½o | Gateway de Pagamentos</title>
 </head>
 <body>
-  <h1>Exemplo Cartão</h1>
+  <h1>Exemplo Cartï¿½o</h1>
 <%
 If Request.Form("acao") <> "criar" Then 'acao
 %>
@@ -13,7 +13,7 @@ If Request.Form("acao") <> "criar" Then 'acao
     URL retorno: <input type="text" name="UrlRetorno" value="http://localhost:456/retorno.asp" size="150" /><br />
     Capturar: <select name="Capturar">
       <option value="true">Sim</option>
-      <option value="false">Não</option>
+      <option value="false">Nï¿½o</option>
     </select><br />
   
     <br />Pagamento:<br />
@@ -29,11 +29,11 @@ If Request.Form("acao") <> "criar" Then 'acao
       <option value="elo">Elo</option>
       <option value="discover">Discover</option>
     </select><br />
-    Tipo de operação: <select name="PagamentoTipoOperacao">
-      <option value="credito_a_vista">Crédito à vista</option>
+    Tipo de operaï¿½ï¿½o: <select name="PagamentoTipoOperacao">
+      <option value="credito_a_vista">Crï¿½dito ï¿½ vista</option>
       <option value="parcelado_loja">Parcelado loja</option>
       <option value="parcelado_administradora">Parcelado administradora</option>
-      <option value="debito">Débito</option>
+      <option value="debito">Dï¿½bito</option>
     </select><br />
     Parcelas: <select name="PagamentoParcelas">
     <% For i = 1 to 12 %>
@@ -41,24 +41,24 @@ If Request.Form("acao") <> "criar" Then 'acao
     <% Next %>
     </select><br />
   
-    <br />Cartão<br />
-    Número: <input type="text" name="PagamentoCartaoNumero" value="" /><br />
+    <br />Cartï¿½o<br />
+    Nï¿½mero: <input type="text" name="PagamentoCartaoNumero" value="" /><br />
     CVV: <input type="text" name="PagamentoCartaoCvv" value="" /><br />
     Validade: <input type="text" name="PagamentoCartaoValidade" value="" /><br />
   
     <br />Pedido<br />
-    Número: <input type="text" name="PedidoNumero" value="1234" /><br />
+    Nï¿½mero: <input type="text" name="PedidoNumero" value="1234" /><br />
     Total: <input type="text" name="PedidoTotal" value="123.45" /><br />
     Moeda: <input type="text" name="PedidoMoeda" value="real" /><br />
-    Descrição: <input type="text" name="PedidoDescricao" value="Pedido de teste Locaweb" /><br />
+    Descriï¿½ï¿½o: <input type="text" name="PedidoDescricao" value="Pedido de teste Locaweb" /><br />
   
     <br />Comprador<br />
     Nome: <input type="text" name="CompradorNome" value="Pedro Bonamides" /><br />
     Documento: <input type="text" name="CompradorDocumento" value="12345678909" /><br />
-    Endereço: <input type="text" name="CompradorEndereco" value="Rua Itapaiúna" /><br />
-    Número: <input type="text" name="CompradorNumero" value="2434" /><br />
+    Endereï¿½o: <input type="text" name="CompradorEndereco" value="Rua Itapaiï¿½na" /><br />
+    Nï¿½mero: <input type="text" name="CompradorNumero" value="2434" /><br />
     Bairro: <input type="text" name="CompradorBairro" value="Jardim Morumbi" /><br />
-    Cidade: <input type="text" name="CompradorCidade" value="São Paulo" /><br />
+    Cidade: <input type="text" name="CompradorCidade" value="Sï¿½o Paulo" /><br />
     Estado: <input type="text" name="CompradorEstado" value="SP" /><br />
     CEP: <input type="text" name="CompradorCEP" value="05707-001" /><br />
     <br />
@@ -86,7 +86,7 @@ Else 'acao
     .PagamentoCartaoCvv = Request.Form("PagamentoCartaoCvv")
     .PagamentoCartaoValidade = Request.Form("PagamentoCartaoValidade")
     .PagamentoTipoOperacao = Request.Form("PagamentoTipoOperacao")
-    .PagamentoParcelas = CInt(Request.Form("PagamentoParcelas"))
+    .PagamentoParcelas = Request.Form("PagamentoParcelas")
 
     .CompradorNome = Request.Form("CompradorNome")
     .CompradorDocumento = Request.Form("CompradorDocumento")
@@ -103,14 +103,18 @@ Else 'acao
 
   If transacao.TemErro Then
     Response.Write("<h2>Erros encontrados</h2>")
-    Response.Write("Código de erro: " & transacao.ErroCodigo & "<br />")
+    Response.Write("Cï¿½digo de erro: " & transacao.ErroCodigo & "<br />")
     Response.Write("Mensagem de erro: " & transacao.ErroMensagem & "<br />")
     Response.Write("<p><a href=""javascript:history.back();"">Voltar</a></p>")
   Else
-    urlRedirect = transacao.UrlAcesso
+    Response.Write("<h2>Dados da transaÃ§Ã£o</h2>")
+    Response.Write("ID: " & transacao.ID & "<br />")
+    Response.Write("Status: " & transacao.Status & "<br />")
+    Response.Write("NÃºmero do pedido: " & transacao.NumeroPedido & "<br />")
+    Response.Write("Meio de pagamento: " & transacao.MeioPagamento & "<br />")
   End If
 
-  'Sempre libere os recursos dos objetos após utilizá-los.'
+  'Sempre libere os recursos dos objetos apï¿½s utilizï¿½-los.'
   Set cartao = Nothing
   Set transacao = Nothing
   Set gateway = Nothing 
