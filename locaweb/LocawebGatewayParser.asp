@@ -21,7 +21,11 @@ Class LocawebGatewayParser
         transacao.Status = data.transacao.status
         transacao.NumeroPedido = data.transacao.numero_pedido
         transacao.MeioPagamento = data.transacao.meio_pagamento
+
+    If transacao.MeioPagamento <> "redecard_ws" Then
         transacao.UrlAcesso = data.transacao.url_acesso
+	End If
+        
         Set transacao.Detalhes = GetDetalhes(data.transacao)
 
         Set data = Nothing
