@@ -107,17 +107,23 @@ Else 'acao
     Response.Write("Mensagem de erro: " & transacao.ErroMensagem & "<br />")
     Response.Write("<p><a href=""javascript:history.back();"">Voltar</a></p>")
   Else
-    urlRedirect = transacao.UrlAcesso
+    Response.Write("<h2>Dados da transação</h2>")
+    Response.Write("ID: " & transacao.ID & "<br />")
+    Response.Write("Status: " & transacao.Status & "<br />")
+    Response.Write("Número do pedido: " & transacao.NumeroPedido & "<br />")
+    Response.Write("Meio de pagamento: " & transacao.MeioPagamento & "<br />")
+    Response.Write("URL de acesso: " & transacao.UrlAcesso & "<br />")
+    Response.Write("<hr />")
+
+    If transacao.UrlAcesso <> "" Then
+      Response.Write("<a href=""" & transacao.UrlAcesso & """ target=""_blank"">Clique aqui redirecionar</a><br />")
+    End If
   End If
 
   'Sempre libere os recursos dos objetos após utilizá-los.'
   Set cartao = Nothing
   Set transacao = Nothing
   Set gateway = Nothing 
-
-  If urlRedirect <> "" Then
-    Response.Redirect(urlRedirect)
-  End If
 End If 'acao
 %>
 </body>

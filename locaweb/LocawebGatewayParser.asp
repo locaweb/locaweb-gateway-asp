@@ -21,10 +21,7 @@ Class LocawebGatewayParser
         transacao.Status = data.transacao.status
         transacao.NumeroPedido = data.transacao.numero_pedido
         transacao.MeioPagamento = data.transacao.meio_pagamento
-
-    If transacao.MeioPagamento <> "redecard_ws" Then
-        transacao.UrlAcesso = data.transacao.url_acesso
-	End If
+        transacao.UrlAcesso = GetUrlAcesso(data.transacao)
         
         Set transacao.Detalhes = GetDetalhes(data.transacao)
 
@@ -33,6 +30,16 @@ Class LocawebGatewayParser
 
     Private Function HasData(body)
         HasData = InStr(body, """transacao"":{""id"":") <> 0
+    End Function
+
+    Private Function GetUrlAcesso(transacao)
+        Dim urlAcesso : urlAcesso = Filter(transacao.Keys(), "url_acesso")
+
+        If (UBound(urlAcesso) = -1) Then
+            GetUrlAcesso = ""
+        Else
+            GetUrlAcesso = transacao.url_acesso
+        End If
     End Function
 
     Private Function GetDetalhes(transacao)
